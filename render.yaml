@@ -14,17 +14,14 @@ services:
       - key: PYTHONPATH
         value: "/opt/render/project/src/backend:/opt/render/project/src/backend/Clean_CSV"
 
-  # Frontend
-  - type: web
+  # Frontend - Static Site
+  - type: static
     name: csv-cleaner-frontend
-    env: node
-    plan: free
-    buildCommand: "cd frontend && npm ci && npm run build"
-    startCommand: "cd frontend && npm start"
+    buildCommand: "npm ci && npm run build"
+    staticPublishPath: out
+    rootDir: frontend
     envVars:
       - key: NODE_VERSION
         value: 18
       - key: NEXT_PUBLIC_API_URL
         value: https://csv-cleaner-api.onrender.com
-      - key: PORT
-        value: 10000
