@@ -15,6 +15,10 @@ from typing import Optional, Iterator
 from Clean_CSV.cleaner import clean_csv_data
 import json
 import io
+import sys
+
+# Add the current directory to Python path for local imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI(title="CSV Data Cleaner API", version="1.0.0")
 
