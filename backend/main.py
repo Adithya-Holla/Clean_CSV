@@ -2,23 +2,42 @@
 FastAPI backend for CSV Data Cleaner
 """
 
+import os
+import sys
+
+# Add the current directory to Python path for local imports
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, current_dir)
+sys.path.insert(0, os.path.join(current_dir, 'Clean_CSV'))
+
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 import pandas as pd
-import os
 import tempfile
 import uuid
 import asyncio
 import time
 from typing import Optional, Iterator
-from Clean_CSV.cleaner import clean_csv_data
+
+# Try different import methods
+try:
+    from Clean_CSV.cleaner import clean_csv_data
+except ImportError:
+    try:
+        from cleaner import clean_csv_data
+    except ImportError:
+        # If all else fails, we'll define a simple fallback
+        import sys
+        cleaner_path = os.path.join(current_dir, 'Clean_CSV', 'cleaner.py')
+        if os.path.exists(cleaner_path):
+            sys.path.insert(0, os.path.join(current_dir, 'Clean_CSV'))
+            from cleaner import clean_csv_data
+        else:
+            raise ImportError("Could not find cleaner module")
+
 import json
 import io
-import sys
-
-# Add the current directory to Python path for local imports
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI(title="CSV Data Cleaner API", version="1.0.0")
 

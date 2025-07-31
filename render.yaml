@@ -11,6 +11,8 @@ services:
         value: 3.11.0
       - key: ENVIRONMENT
         value: production
+      - key: PYTHONPATH
+        value: "/opt/render/project/src/backend:/opt/render/project/src/backend/Clean_CSV"
 
   # Frontend
   - type: web
