@@ -1,8 +1,0 @@
-Name,Age,Gender,Income,JoinDate
-Alice,25,Female,50000,2021-05-01
-Bob,,Male,,2022/01/10
-,35,,65000,10-03-2020
-David,22,Male,47000,03-15-2019
-Eve,28,Female,abc,"April 4, 2021"
-Frank,180,Male,52000,2020-12-25
-Grace,29,Female,-5000,15/06/2021

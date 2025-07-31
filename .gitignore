@@ -3,6 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Production builds
 .next/
@@ -11,6 +12,7 @@ dist/
 build/
 
 # Environment variables
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -26,6 +28,13 @@ env/
 venv/
 ENV/
 .venv/
+.pytest_cache/
+*.egg-info/
+
+# Temporary files
+temp_files/
+*.tmp
+*.temp
 
 # Database
 *.db
@@ -51,9 +60,16 @@ Thumbs.db
 *.swo
 *~
 
-# Temporary files
-temp_files/
-*.tmp
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Test artifacts
+.pytest_cache/
+.tox/
 *.temp
 
 # Package files
