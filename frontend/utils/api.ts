@@ -13,4 +13,5 @@ export const API_ENDPOINTS = {
   downloadLatest: `${API_BASE_URL}/api/download-latest`,
   download: (fileId: string) => `${API_BASE_URL}/api/download/${fileId}`,
   downloadKeymap: (fileId: string) => `${API_BASE_URL}/api/download-keymap/${fileId}`,
+  status: (fileId: string) => `${API_BASE_URL}/api/status/${fileId}`,
 };
