@@ -24,15 +24,15 @@ export default function FileUpload({ onUpload, isLoading, setIsLoading }: FileUp
     if (!file) return
 
     // File size validation
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const maxSize = 100 * 1024 * 1024; // 100MB
     if (file.size > maxSize) {
-      alert('File size must be less than 10MB');
+      alert('File size must be less than 100MB');
       return;
     }
 
     // Show file size warning for large files
     const fileSizeMB = file.size / (1024 * 1024);
-    if (fileSizeMB > 5) {
+    if (fileSizeMB > 10) {
       const proceed = confirm(`Large file detected (${fileSizeMB.toFixed(1)}MB). Processing may take several minutes. Continue?`);
       if (!proceed) return;
     }
@@ -214,7 +214,7 @@ export default function FileUpload({ onUpload, isLoading, setIsLoading }: FileUp
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          Supported format: CSV files only • Maximum file size: 10MB
+          Supported format: CSV files only • Maximum file size: 100MB
         </p>
       </div>
     </div>
