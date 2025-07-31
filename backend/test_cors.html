@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS Test</title>
+</head>
+<body>
+    <h1>Testing CORS Configuration</h1>
+    <div id="results"></div>
+    
+    <script>
+        async function testCORS() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Testing CORS...</p>';
+            
+            try {
+                // Test health endpoint
+                console.log('Testing health endpoint...');
+                const healthResponse = await fetch('https://csv-cleaner-api.onrender.com/api/health', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (healthResponse.ok) {
+                    const healthData = await healthResponse.json();
+                    resultsDiv.innerHTML += `<p>✅ Health check passed: ${JSON.stringify(healthData)}</p>`;
+                } else {
+                    resultsDiv.innerHTML += `<p>❌ Health check failed: ${healthResponse.status} ${healthResponse.statusText}</p>`;
+                }
+                
+                // Test results endpoint
+                console.log('Testing results endpoint...');
+                const resultsResponse = await fetch('https://csv-cleaner-api.onrender.com/api/results', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (resultsResponse.ok) {
+                    const resultsData = await resultsResponse.json();
+                    resultsDiv.innerHTML += `<p>✅ Results endpoint passed: ${JSON.stringify(resultsData)}</p>`;
+                } else {
+                    resultsDiv.innerHTML += `<p>⚠️ Results endpoint returned: ${resultsResponse.status} ${resultsResponse.statusText}</p>`;
+                }
+                
+                // Test files endpoint
+                console.log('Testing files endpoint...');
+                const filesResponse = await fetch('https://csv-cleaner-api.onrender.com/api/files', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (filesResponse.ok) {
+                    const filesData = await filesResponse.json();
+                    resultsDiv.innerHTML += `<p>✅ Files endpoint passed: ${JSON.stringify(filesData)}</p>`;
+                } else {
+                    resultsDiv.innerHTML += `<p>❌ Files endpoint failed: ${filesResponse.status} ${filesResponse.statusText}</p>`;
+                }
+                
+            } catch (error) {
+                resultsDiv.innerHTML += `<p>❌ Error: ${error.message}</p>`;
+                console.error('CORS test error:', error);
+            }
+        }
+        
+        // Run test when page loads
+        window.onload = testCORS;
+    </script>
+</body>
+</html>
